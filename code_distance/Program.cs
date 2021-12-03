@@ -8,26 +8,26 @@ namespace code_distance
         public static void Main(string[] args)
         {
             Console.Write("Введите количество строк матрицы: ");
-            int n = int.Parse(Console.ReadLine());
+            int n = int.Parse(Console.ReadLine() ?? string.Empty);
 
-            List<List<int>> H = new List<List<int>>();
+            List<List<int>> matrix = new List<List<int>>();
             for (int i = 0; i < n; i++)
             {
-                H.Add(new List<int>());
+                matrix.Add(new List<int>());
 
                 string line = Console.ReadLine();
+                if (line == null) continue;
                 foreach (var item in line)
                 {
-                    H[i].Add(int.Parse(item.ToString()));
+                    matrix[i].Add(int.Parse(item.ToString()));
                 }
             }
 
-            List<int> d = CodeDistance.GetCodeDistance(H);
-            Console.Write("D = ");
-            foreach (var item in d)
-            {
-                Console.Write(item + " ");
-            }
+            int dA = CodeDistance.GetCodeDistanceA(matrix);
+            Console.WriteLine("D(a) = " + dA);
+
+            int dB = CodeDistance.GetCodeDistanceB(matrix);
+            Console.Write("D(b) = " + dB);
         }
     }
 }
